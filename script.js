@@ -44,3 +44,47 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+
+function startQuiz() {
+    // hide start screen
+    var startScreenEl = document.getElementById("start-screen");
+    startScreenEl.setAttribute("class", "hide");
+    // un-hide questions section
+    questionsEl.removeAttribute("class");
+    // start timer
+    timerId = setInterval(clockTick, 1000);
+    // show starting time
+    timerEl.textContent = time;
+    getQuestion();
+  }
+
+  function getQuestion() {
+    // get current question object from array
+    var currentQuestion = questions[currentQuestionIndex];
+    // update title with current question
+    var titleEl = document.getElementById("question-title");
+    titleEl.textContent = currentQuestion.title;
+    // clear out any old question choices
+    choicesEl.innerHTML = "";
+    // loop over choices
+    currentQuestion.choices.forEach(function(choice, i) {
+      // create new button for each choice
+      var choiceNode = document.createElement("button");
+      choiceNode.setAttribute("class", "choice");
+      choiceNode.setAttribute("value", choice);
+      choiceNode.textContent = i + 1 + ". " + choice;
+      // attach click event listener to each choice
+      choiceNode.onclick = questionClick;
+      // display on the page
+      choicesEl.appendChild(choiceNode);
+    });
+  }
+
+  function questionClick() {
+    // check if user guessed wrong
+    if (this.value !== questions[currentQuestionIndex].answer) {
+      // penalize time
+      time -= 15;
+      if (time < 0) {
+        time = 0;
+      }
