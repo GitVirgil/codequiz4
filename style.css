@@ -26,10 +26,50 @@ button {
 button:hover {
     background-color: #8750a5;
 }
+
 .choice button {
     display:block
 }
+
 input[type="text"] {
 font-size: 100%;
 }
+
+ol {
+    padding-left: 0px;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  li {
+    padding: 5px;
+    list-style: decimal inside none;
+  }
+  li:nth-child(odd) {
+    background-color: #f3edfc;
+  }  
+
+  .wrapper {
+    margin: 100px auto 0 auto;
+    max-width: 600px;
+  }
+  .hide {
+    display: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
